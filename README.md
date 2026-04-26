@@ -1,70 +1,144 @@
-# Getting Started with Create React App
+# Movie Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Netflix-inspired movie browsing web app built with React, Tailwind CSS, Firebase Authentication, Redux Toolkit, and TMDB APIs.
 
-## Available Scripts
+This README is being maintained as a progress log of what has been implemented in the project so far. It will be updated further as more features are added.
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+- React
+- React Router
+- Redux Toolkit
+- React Redux
+- Tailwind CSS
+- Firebase Authentication
+- TMDB API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Work Done Till Now
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 1. Project Setup
 
-### `npm test`
+- Created the project using Create React App.
+- Installed and configured Tailwind CSS for styling.
+- Set up the basic folder structure for components, hooks, and utilities.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Routing Setup
 
-### `npm run build`
+- Configured routing using `react-router-dom`.
+- Added the `/` route for the login page.
+- Added the `/browse` route for the main movie browsing page.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. Firebase Integration
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Connected the project with Firebase.
+- Configured Firebase Authentication.
+- Added Firebase Analytics setup for browser usage.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 4. Authentication Features
 
-### `npm run eject`
+- Built a combined Sign In and Sign Up form.
+- Added toggle functionality between Sign In and Sign Up modes.
+- Implemented user registration using Firebase Authentication.
+- Implemented user login using Firebase Authentication.
+- Added `updateProfile` to save user display name and profile image after signup.
+- Implemented sign out functionality.
+- Added auth state checking using `onAuthStateChanged`.
+- Redirected authenticated users to `/browse`.
+- Redirected unauthenticated users back to `/`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 5. Form Validation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Created a custom `Validate` utility.
+- Added validation for email format.
+- Added validation for password strength.
+- Added validation for full name during signup.
+- Displayed validation and Firebase error messages on the form.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 6. Redux Store Setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Configured a global Redux store using Redux Toolkit.
+- Created `userSlice` to manage authenticated user data.
+- Created `movieSlice` to manage movie-related data.
+- Connected the app with Redux using the `Provider`.
 
-## Learn More
+### 7. Header UI
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Built a reusable header component.
+- Added the Netflix logo in the header.
+- Added a user profile image in the header after login.
+- Added a Sign Out button in the header.
+- Updated the header background to use a Netflix-like transparent black gradient instead of a plain solid background.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 8. Login Page UI
 
-### Code Splitting
+- Added a full-screen background image similar to Netflix-style login screens.
+- Added a dark overlay on top of the background image.
+- Styled the auth form using Tailwind CSS.
+- Created a clean centered login/signup card layout.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 9. Movie Data Fetching
 
-### Analyzing the Bundle Size
+- Created a custom hook `useNowPlaying`.
+- Fetched now playing movies from TMDB API.
+- Stored fetched movies inside Redux.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 10. Browse Page Setup
 
-### Making a Progressive Web App
+- Created the `Browse` page.
+- Connected the browse page with the header.
+- Added the main content structure using `MainContainer` and `SecondaryContainer`.
+- Triggered now playing movie data fetch when the browse page loads.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 11. Main Movie Hero Section
 
-### Advanced Configuration
+- Created `MainContainer` for the featured movie section.
+- Selected the first now playing movie as the current featured movie.
+- Passed featured movie title and overview into `VideoTitle`.
+- Started building `VideoBG` for the video background section.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 12. Video Title Section
 
-### Deployment
+- Created `VideoTitle` component.
+- Displayed the featured movie title.
+- Displayed the featured movie overview.
+- Added placeholder buttons for `Play` and `More Info`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 13. Secondary Content Section
 
-### `npm run build` fails to minify
+- Created `SecondaryContainer` component as a placeholder for upcoming movie lists and categories.
+- Kept the structure ready for future expansion.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Current Project Status
+
+- Authentication flow is working.
+- Redux store integration is working.
+- TMDB now playing movie data fetch is connected.
+- Main browse page structure is started.
+- Hero title section is partially implemented.
+- Video background and secondary movie rows are still pending further development.
+
+## Planned Next Updates
+
+- Complete the `VideoBG` component.
+- Add movie trailer or background video support.
+- Build movie cards and movie list rows inside `SecondaryContainer`.
+- Add more TMDB categories such as popular, top rated, and upcoming.
+- Improve responsiveness for mobile and tablet screens.
+- Refine the browse page UI to look more polished and Netflix-like.
+- Add GPT-based movie search or recommendation features later if needed.
+
+## Run The Project
+
+```bash
+npm start
+```
+
+## Build The Project
+
+```bash
+npm run build
+```
+
+## Note
+
+This README is not final. It will be updated continuously as more features are implemented in the project.
