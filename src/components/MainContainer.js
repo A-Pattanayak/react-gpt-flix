@@ -12,7 +12,7 @@ const MainContainer = () => {
     const {original_title,overview,id} = mainMovie;
 
   return (
-    <div>
+    <div className='relative'>
       <VideoBG movieId={id}/>
       <VideoTitle title={original_title} overview={overview}  /> 
     </div>
