@@ -7,3 +7,4 @@ export const apiOptions = {
     'accept': 'application/json'
   }
 }
+export const posterCDN= "https://image.tmdb.org/t/p/w780";

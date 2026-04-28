@@ -1,14 +1,14 @@
 import React, { useState, useRef } from 'react';
-import Validate from './utils/Validate';
+import Validate from '../utils/Validate';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,updateProfile
 } from "firebase/auth";
-import auth from './utils/Firebase';
+import auth from '../utils/Firebase';
 import Header from './Header';
 import { useDispatch } from 'react-redux';
-import  {addUser} from './utils/userSlice';
-import { profileLogo } from './utils/CDN';
+import  {addUser} from '../utils/userSlice';
+import { profileLogo } from '../utils/CDN';
 
 
 const Login = (props) => {

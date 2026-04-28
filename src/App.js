@@ -1,7 +1,6 @@
-import Body from './Body';
+import Body from './components/Body';
 import {Provider} from 'react-redux';
 import appStore from './utils/appStore';
-import Header from './Header';
 
 function App() {
   return (

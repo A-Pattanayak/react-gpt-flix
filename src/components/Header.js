@@ -1,13 +1,13 @@
 import React from 'react';
-import auth from './utils/Firebase';
+import auth from '../utils/Firebase';
 import {signOut} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
-import  {addUser,removeUser} from './utils/userSlice';
-import { netflixLogo } from './utils/CDN';
+import  {addUser,removeUser} from '../utils/userSlice';
+import { netflixLogo } from '../utils/CDN';
 const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
