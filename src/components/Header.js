@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import  {addUser,removeUser} from '../utils/userSlice';
 import { netflixLogo } from '../utils/CDN';
+import {toggleSearch} from '../utils/searchSlice';
 const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
@@ -24,8 +25,16 @@ const Header = () => {
     dispatch(removeUser());
     navigate('/');
   }
+  });
+
   return () => unsubscribe();
-});}, [])
+}, [dispatch, navigate])
+
+  const handleSearch = () => {
+    dispatch(toggleSearch());
+    
+  }
+
 
   const handleSignOut = () => {
     signOut(auth)
@@ -51,6 +60,9 @@ const Header = () => {
               alt="Profile"
               className="h-10 w-10 rounded-md object-cover"
             />
+            <button className='bg-violet-600 py-2 px-4 text-white rounded-lg' onClick={handleSearch}>
+              Search with Gemini
+            </button>
             <button onClick={handleSignOut} className="rounded-lg bg-red-700 px-4 py-2 text-white">
               Sign Out
             </button>

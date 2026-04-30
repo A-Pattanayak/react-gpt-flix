@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { apiOptions } from "../utils/CDN";
 import { addUpcomingMovies } from "../utils/movieSlice";
+import { fetchFromTmdb } from "../utils/tmdbApi";
 
 
 const useUpcomingMovies = () => {
       const dispatch = useDispatch();
   const getUpcomingMovies=async()=>{
-    const response= await fetch("https://api.themoviedb.org/3/movie/upcoming?page=1",apiOptions); 
-    const json= await response.json();
-    console.log(json);
-    dispatch(addUpcomingMovies(json.results));
+    const json= await fetchFromTmdb("/movie/upcoming?page=1");
+    if (json?.results) {
+      dispatch(addUpcomingMovies(json.results));
+    }
   }
   useEffect(()=>{
     getUpcomingMovies();
-  },[])}
+  },[dispatch])}
 
   export default useUpcomingMovies;

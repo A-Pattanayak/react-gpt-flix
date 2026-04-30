@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { apiOptions } from "../utils/CDN";
 import { addTopRatedMovies } from "../utils/movieSlice";
+import { fetchFromTmdb } from "../utils/tmdbApi";
 
 
 const useTopRatedMovies = () => {
       const dispatch = useDispatch();
   const getTopRatedMovies=async()=>{
-    const response= await fetch("https://api.themoviedb.org/3/movie/top_rated?page=1",apiOptions); 
-    const json= await response.json();
-    console.log(json);
-    dispatch(addTopRatedMovies(json.results));
+    const json= await fetchFromTmdb("/movie/top_rated?page=1");
+    if (json?.results) {
+      dispatch(addTopRatedMovies(json.results));
+    }
   }
   useEffect(()=>{
     getTopRatedMovies();
-  },[])}
+  },[dispatch])}
 
   export default useTopRatedMovies;
