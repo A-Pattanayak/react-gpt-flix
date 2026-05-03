@@ -1,147 +1,89 @@
-# Movie Website
+# React GPT Flix
 
-A Netflix-inspired movie browsing web app built with React, Tailwind CSS, Firebase Authentication, Redux Toolkit, and TMDB APIs.
+A Netflix-inspired movie browsing app built with React, Firebase Authentication, Redux Toolkit, Tailwind CSS, TMDB, and Gemini-powered movie recommendations.
 
-This README is being used as a simple progress log for the project. It explains what has been built so far and what is planned next.
+## Features
+
+- Email/password signup and sign in with Firebase Authentication
+- Auth-aware routing between login and browse pages
+- Netflix-style browse page with hero trailer playback
+- Movie rows for now playing, popular, top rated, and upcoming titles
+- TMDB-backed movie search results
+- Gemini-powered recommendations from a natural-language prompt
+- Multilingual search UI labels for English and Hindi
+- Redux Toolkit state management for user, movie, search, and app config data
+- Responsive Tailwind CSS styling
 
 ## Tech Stack
 
-- React
+- React and Create React App
 - React Router
-- Redux Toolkit
-- React Redux
+- Redux Toolkit and React Redux
 - Tailwind CSS
-- Firebase Authentication
+- Firebase Authentication and Analytics
 - TMDB API
-- YouTube embed player for trailer background videos
+- Google Gemini API
+- YouTube iframe trailers
 
-## Features Built So Far
+## Getting Started
 
-### Project Setup
+Install dependencies:
 
-- Created the app using Create React App.
-- Added Tailwind CSS for styling.
-- Created folders for components, hooks, and utilities.
-- Set up reusable constants inside the utility files.
+```bash
+npm install
+```
 
-### Routing
+Create a `.env` file in the project root and add your API keys:
 
-- Added routing with `react-router-dom`.
-- `/` shows the login/signup page.
-- `/browse` shows the main movie browsing page.
+```bash
+REACT_APP_TMDB_TOKEN=your_tmdb_v4_access_token
+REACT_APP_GEMINI_KEY=your_gemini_api_key
+```
 
-### Firebase Authentication
-
-- Connected Firebase to the app.
-- Added sign up with email, password, name, and profile image.
-- Added sign in with email and password.
-- Added sign out from the browse page header.
-- Used `onAuthStateChanged` to keep track of login state.
-- Redirects logged-in users to `/browse`.
-- Redirects logged-out users to `/`.
-
-### Form Validation
-
-- Created a `Validate` utility.
-- Added validation for email.
-- Added validation for password.
-- Added validation for full name during signup.
-- Shows validation and Firebase error messages on the form.
-
-### Redux Store
-
-- Configured Redux Toolkit store in `appStore.js`.
-- Created `userSlice` for logged-in user data.
-- Created `movieSlice` for movie data and trailer data.
-- Connected Redux to the app using `Provider`.
-
-### Movie API Hooks
-
-Created custom hooks to fetch movie data from TMDB:
-
-- `useNowPlaying`
-- `usePopularMovies`
-- `useTopRatedMovies`
-- `useUpcomingMovies`
-- `useTrailer`
-
-The movie lists are stored in Redux so different components can use the same data.
-
-### Browse Page
-
-- Created the main `Browse` page.
-- Added the `Header`.
-- Added the `MainContainer` for the hero section.
-- Added the `SecondaryContainer` for movie rows.
-- Fetches now playing, popular, top rated, and upcoming movies when the browse page loads.
-
-### Header
-
-- Shows the Netflix logo.
-- Shows the user's profile image after login.
-- Has a sign out button.
-- Uses a dark transparent gradient so it fits over the hero video.
-
-### Main Hero Section
-
-- Uses the first now playing movie as the featured movie.
-- Shows the movie title and overview.
-- Shows `Play` and `More Info` buttons.
-- Fetches a trailer for the featured movie.
-- Plays the trailer in the background using a YouTube iframe.
-
-### Movie Rows
-
-- Created `MovieList` component for horizontal rows.
-- Created `MovieCard` component for movie posters.
-- Added rows for:
-  - Now Playing
-  - Popular
-  - Top Rated
-  - Upcoming
-- Added horizontal scrolling for movie rows.
-- Hid the scrollbar to make the rows look cleaner.
-- Added spacing between posters.
-- Added a Netflix-style overlap effect where the movie rows move upward near the hero section.
-
-## Current Project Status
-
-- Authentication is working.
-- Login and signup UI are built.
-- Redux store is connected.
-- TMDB movie data is being fetched.
-- Main hero section is working with title, overview, and video background.
-- Secondary movie rows are displayed for multiple categories.
-- Basic Netflix-like styling is in place.
-
-## Planned Next Updates
-
-- Improve responsive design for mobile screens.
-- Add better loading states before movie data arrives.
-- Add fallback UI if trailer or poster data is missing.
-- Add different movie categories with cleaner labels.
-- Improve hover effects on movie cards.
-- Add GPT-powered movie search or recommendations later.
-- Clean up repeated code in API hooks.
-
-## Run The Project
+Start the development server:
 
 ```bash
 npm start
 ```
 
-## Build The Project
+Build for production:
 
 ```bash
 npm run build
 ```
 
-If PowerShell blocks `npm`, use:
+Run tests:
+
+```bash
+npm test
+```
+
+If PowerShell blocks `npm`, run the same commands with `npm.cmd`, for example:
 
 ```bash
 npm.cmd run build
 ```
 
-## Note
+## Project Structure
 
-This project is still in progress. The README will continue to change as more features are added.
+```text
+src/
+  components/   React UI components and pages
+  hooks/        TMDB data-fetching hooks
+  utils/        Firebase, Redux slices, constants, API helpers, and validation
+```
+
+## Firebase
+
+The app is configured for Firebase Authentication and Analytics. Update `src/utils/Firebase.js` if you want to connect it to a different Firebase project.
+
+## Available Scripts
+
+- `npm start` starts the local development server.
+- `npm run build` creates a production build in `build/`.
+- `npm test` runs the test watcher.
+- `npm run eject` ejects Create React App configuration.
+
+## Deployment
+
+The repository includes Firebase configuration files, so the production build can be deployed with Firebase Hosting after installing and authenticating the Firebase CLI.
