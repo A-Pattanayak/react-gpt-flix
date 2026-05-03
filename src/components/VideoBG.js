@@ -4,7 +4,7 @@ import useTrailer from "../hooks/useTrailer";
 const VideoBG = ({movieId}) => {
   const trailerVideo=useSelector((store)=>store.movie?.trailer);
  
-   useTrailer(movieId);
+  useTrailer(movieId);
   return (  
     <div className="absolute inset-0 -z-10 overflow-hidden">
       <iframe

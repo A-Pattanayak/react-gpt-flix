@@ -3,7 +3,7 @@ export const profileLogo="https://icons.veryicon.com/png/o/miscellaneous/social-
 export const apiOptions = {
   method: 'GET',
   headers: {
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2Y2VhY2U3MGU1ZTZmODBlNjU2ZTI4ZjFjZTI5NWRiMiIsIm5iZiI6MTc3Njg2NzczMy44NjgsInN1YiI6IjY5ZThkOTk1NzFjZDkzODYyNTIzZjY2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yzVWiountEFcRPQgH8cHnmy38p4LBm502XXyywf0Wvw',
+    'Authorization': 'Bearer ' + process.env.REACT_APP_TMDB_TOKEN,
     'accept': 'application/json'
   }
 }
@@ -11,7 +11,7 @@ export const posterCDN= "https://image.tmdb.org/t/p/w780";
 
 export const bg_img="https://assets.nflxext.com/ffe/siteui/vlv3/5bd3572a-0d1b-4228-aaa7-5b2dc45952b2/web/IN-en-20260413-TRIFECTA-perspective_4100808f-7dc6-4c78-8677-18db2989f7bc_large.jpg";
 
-export const gemini_img="https://cdn.mos.cms.futurecdn.net/oWKefF8dea8zZNxRdp8rsG.jpg"
+export const gemini_img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB4uQSA-HKAOXh7uRnQdfXD7i-kby9T_tyvA&s"
 
 export const lang=[{
     identifier:"en",
@@ -21,3 +21,4 @@ export const lang=[{
     identifier:"hindi",
     name:"Hindi"
 }]
+
