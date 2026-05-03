@@ -9,6 +9,8 @@ import Header from './Header';
 import { useDispatch } from 'react-redux';
 import  {addUser} from '../utils/userSlice';
 import { profileLogo } from '../utils/CDN';
+import {bg_img} from '../utils/CDN';
+
 
 
 const Login = (props) => {
@@ -47,10 +49,9 @@ const Login = (props) => {
         displayName: name.current.value , photoURL: profileLogo
         }).then(() => {const {uid, email, displayName, photoURL} = auth.currentUser;
             dispatch(addUser({uid:uid, email:email, displayName:displayName, photoURL:photoURL}));
-          console.log(user);
+      
           seterrmsg("Signup successful!");
-        // Profile updated!
-     // ...
+    
       }).catch((error) => {
         console.error("Profile update error: ", error);
       // ...
@@ -70,7 +71,6 @@ const Login = (props) => {
         .then((userCredential) => {
          // Signed in 
          const user = userCredential.user;
-         console.log(user);
          seterrmsg("Signin successful!");
          })
         .catch((error) => {
@@ -85,7 +85,7 @@ const Login = (props) => {
     <div className="relative min-h-screen w-full">
       <Header />  
       <img
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/5bd3572a-0d1b-4228-aaa7-5b2dc45952b2/web/IN-en-20260413-TRIFECTA-perspective_4100808f-7dc6-4c78-8677-18db2989f7bc_large.jpg"
+        src={bg_img}
         alt="bgimage"
         className="absolute inset-0 h-full w-full object-cover"
       />
