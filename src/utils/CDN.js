@@ -1,9 +1,11 @@
 export const netflixLogo="https://images.ctfassets.net/y2ske730sjqp/821Wg4N9hJD8vs5FBcCGg/9eaf66123397cc61be14e40174123c40/Vector__3_.svg?w=460";
 export const profileLogo="https://icons.veryicon.com/png/o/miscellaneous/social-applet-1/user-201.png"
+const tmdbToken = process.env.REACT_APP_TMDB_TOKEN?.trim();
+
 export const apiOptions = {
   method: 'GET',
   headers: {
-    'Authorization': 'Bearer ' + process.env.REACT_APP_TMDB_TOKEN,
+    'Authorization': 'Bearer ' + tmdbToken,
     'accept': 'application/json'
   }
 }
