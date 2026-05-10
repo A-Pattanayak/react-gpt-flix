@@ -5,7 +5,7 @@ import genAI from '../utils/Gemini';
 import { useRef } from 'react';
 import { apiOptions } from '../utils/CDN';
 import {useDispatch} from 'react-redux';
-import {addMovieNames} from '../utils/searchSlice';
+import {addMovieNames, setSearchLoading} from '../utils/searchSlice';
 
 const SearchBar=()=>{
     const dispatch=useDispatch();
@@ -19,6 +19,7 @@ const SearchBar=()=>{
     }
     
    const handleGptSearch = async () => {
+    dispatch(setSearchLoading(true));
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query : " + 
       searchText.current.value + 
@@ -33,9 +34,6 @@ const SearchBar=()=>{
       
     
       const gptMoviesString = result.response.text();
-      console.log("Gemini Response:", gptMoviesString);
-
-     
       const gptMoviesArray = gptMoviesString.split(",").map((movie)=>movie.trim());
 
       const promiseArray= gptMoviesArray.map((movie)=> fetchGeminiMovies(movie));
@@ -45,6 +43,7 @@ const SearchBar=()=>{
 
     } catch (error) {
       console.error("Gemini API Error:", error);
+      dispatch(setSearchLoading(false));
     }
   };
 
@@ -58,9 +57,9 @@ const SearchBar=()=>{
             />
             <div className='fixed inset-0 z-0 bg-black/65'></div>
         <div className='relative z-10 px-4 pt-32 md:pt-40'>
-           <form onSubmit={(e)=>e.preventDefault()} className="mx-auto grid w-full max-w-3xl grid-cols-12 rounded-lg bg-black/75 p-2 shadow-xl">
-                <input ref={searchText} type='text' className='col-span-8 rounded-md p-4 text-black outline-none md:col-span-9' placeholder={lang[currlang].gptSearchPlaceholder}></input>
-                <button onClick={handleGptSearch} type='submit' className='col-span-4 ml-2 rounded-md bg-red-700 px-4 py-2 font-semibold text-white hover:bg-red-800 md:col-span-3'>{lang[currlang].search}</button>
+           <form onSubmit={(e)=>e.preventDefault()} className="mx-auto flex w-full max-w-3xl flex-col gap-2 rounded-lg bg-black/75 p-2 shadow-xl sm:grid sm:grid-cols-12">
+                <input ref={searchText} type='text' className='rounded-md p-3 text-black outline-none sm:col-span-8 sm:p-4 md:col-span-9' placeholder={lang[currlang].gptSearchPlaceholder}></input>
+                <button onClick={handleGptSearch} type='submit' className='rounded-md bg-red-700 px-4 py-3 font-semibold text-white hover:bg-red-800 sm:col-span-4 sm:py-2 md:col-span-3'>{lang[currlang].search}</button>
            </form>
         </div></div>
     )

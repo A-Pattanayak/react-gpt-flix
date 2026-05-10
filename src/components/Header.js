@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import  {addUser,removeUser} from '../utils/userSlice';
-import { netflixLogo } from '../utils/CDN';
 import {toggleSearch} from '../utils/searchSlice';
 import {lang} from '../utils/CDN';
 import {changeLanguage} from '../utils/configSlice';
@@ -56,26 +55,26 @@ const Header = () => {
 
   return (
     <header className="absolute left-0 top-0 z-20 w-full bg-gradient-to-b from-black/85 via-black/45 to-transparent">
-      <div className="flex items-center justify-between px-4 pt-4 pb-4 sm:px-8 sm:pt-6 sm:pb-5 md:px-12">
-        <img
-          src={netflixLogo}
-          alt="Netflix logo"
-          className="h-12 w-36 sm:h-14 md:h-16"
-        />
+      <div className="flex items-start justify-between gap-3 px-3 pb-4 pt-5 sm:items-center sm:px-8 sm:pt-6 md:px-12">
+        <div className="select-none whitespace-nowrap text-lg font-black uppercase tracking-wide sm:text-2xl md:text-3xl">
+          <span className="rounded-md bg-red-600 px-1.5 py-0.5 text-black">Gem</span>
+          <span className="ml-1 text-red-600">Flix</span>
+        </div>
         {user && (
-          <div className="flex items-center gap-3">
-            {searchStatus && <select className='p-1.5 mr-2 bg-gray-700  border-gray-500 text-white rounded-lg' onChange={handleLang}>
+          <div className="flex max-w-[210px] flex-wrap items-center justify-end gap-1.5 sm:max-w-none sm:gap-3">
+            {searchStatus && <select className='rounded-md border-gray-500 bg-gray-700 px-2 py-1.5 text-xs text-white sm:mr-2 sm:rounded-lg sm:text-base' onChange={handleLang}>
               {lang.map((language)=><option key={language.identifier} value={language.identifier}>{language.name}</option>)}
             </select>}
-            <button className='bg-violet-600 py-2 px-4 text-white rounded-lg' onClick={handleSearch}>
-              {searchStatus? 'Homepage':'Search with Gemini'}
+            <button className='rounded-md bg-violet-600 px-2.5 py-1.5 text-xs font-semibold text-white sm:rounded-lg sm:px-4 sm:py-2 sm:text-base' onClick={handleSearch}>
+              <span className='sm:hidden'>{searchStatus? 'Home':'Search'}</span>
+              <span className='hidden sm:inline'>{searchStatus? 'Homepage':'Search with Gemini'}</span>
             </button>
             <img
               src={user.photoURL || 'https://icons.veryicon.com/png/o/miscellaneous/social-applet-1/user-201.png'}
               alt="Profile"
-              className="h-10 w-10 rounded-md object-cover"
+              className="hidden h-10 w-10 rounded-md object-cover sm:block"
             />
-            <button onClick={handleSignOut} className="rounded-lg bg-red-700 px-4 py-2 text-white">
+            <button onClick={handleSignOut} className="rounded-md bg-red-700 px-2.5 py-1.5 text-xs font-semibold text-white sm:rounded-lg sm:px-4 sm:py-2 sm:text-base">
               Sign Out
             </button>
           </div>

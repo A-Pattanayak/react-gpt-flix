@@ -1,27 +1,28 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { addTrailer } from "../utils/movieSlice";
 import { fetchFromTmdb } from "../utils/tmdbApi";
 
 
 const useTrailer=(movieId)=>{
+  const dispatch = useDispatch();
+  const trailer = useSelector((store) => store.movie.trailerVideos?.[movieId]);
 
-    const dispatch = useDispatch(); 
+  useEffect(()=>{
     const trailerFetch=async()=>{
-    const json = await fetchFromTmdb(`/movie/${movieId}/videos?language=en-US`);
+      const json = await fetchFromTmdb(`/movie/${movieId}/videos?language=en-US`);
 
-    if (json?.results?.length) {
-      const filterData=json.results.filter((video)=>video.type==='Trailer')
-      const trailer= filterData.length ? filterData[0] : json.results[0];
-      dispatch(addTrailer(trailer));
+      if (json?.results?.length) {
+        const filterData=json.results.filter((video)=>video.type==='Trailer')
+        const trailer= filterData.length ? filterData[0] : json.results[0];
+        dispatch(addTrailer({ movieId, trailer }));
+      }
     }
 
-  }
-  useEffect(()=>{
-    if (movieId) {
+    if (movieId && !trailer) {
       trailerFetch();
     }
-  },[dispatch, movieId])
+  },[dispatch, movieId, trailer])
 }
 
   export default useTrailer

@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import auth from '../utils/Firebase';
 import Header from './Header';
+import LoginShimmerUI from './LoginShimmerUI';
 import { useDispatch } from 'react-redux';
 import  {addUser} from '../utils/userSlice';
 import { profileLogo } from '../utils/CDN';
@@ -19,6 +20,7 @@ const Login = (props) => {
 
   const [isSignIn, setIsSignIn] = useState(true);
   const [errmsg, seterrmsg] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleSignup = () => {
     setIsSignIn((currentState) => !currentState);
@@ -39,12 +41,12 @@ const Login = (props) => {
          return;
     }
     seterrmsg(null);
+    setIsLoading(true);
     if(!isSignIn){
          createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
          .then((userCredential) => {
         // Signed up 
         const user = userCredential.user;
-        
         updateProfile(user, {  
         displayName: name.current.value , photoURL: profileLogo
         }).then(() => {const {uid, email, displayName, photoURL} = auth.currentUser;
@@ -54,36 +56,41 @@ const Login = (props) => {
     
       }).catch((error) => {
         console.error("Profile update error: ", error);
+        seterrmsg(error.code ? `${error.code}-${error.message}` : error.message);
       // ...
-      });
+      }).finally(() => setIsLoading(false));
         
         })
         .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         seterrmsg(errorCode+"-"+errorMessage);
+        setIsLoading(false);
         // ..
         });
 
 
     } else {
         signInWithEmailAndPassword(auth, email.current.value, password.current.value)
-        .then((userCredential) => {
+        .then(() => {
          // Signed in 
-         const user = userCredential.user;
          seterrmsg("Signin successful!");
          })
         .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         seterrmsg(errorCode+"-"+errorMessage);
-        });   
+        })
+        .finally(() => setIsLoading(false));   
     }
   };
 
   return (
     <div className="relative min-h-screen w-full">
       <Header />  
+      {isLoading && (
+        <LoginShimmerUI message={isSignIn ? 'Signing you in...' : 'Creating your account...'} />
+      )}
       <img
         src={bg_img}
         alt="bgimage"
@@ -92,9 +99,9 @@ const Login = (props) => {
 
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
-      <div className="relative z-10 flex min-h-screen items-center justify-center">
-        <form className="w-80 rounded-2xl bg-black bg-opacity-75 p-8 text-white" onSubmit={(e) => e.preventDefault()} >
-          <h1 className="mb-6 text-3xl font-bold">
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 pt-20">
+        <form className="w-full max-w-sm rounded-2xl bg-black bg-opacity-75 p-6 text-white sm:p-8" onSubmit={(e) => e.preventDefault()} >
+          <h1 className="mb-6 text-2xl font-bold sm:text-3xl">
             {isSignIn ? 'Sign In' : 'Sign Up'}</h1>
 
 

@@ -21,7 +21,7 @@ const Browse = () => {
       {showSearch ? <Search /> : 
       <>
       <MainContainer />
-      <SecondaryContainer /> 
+      <SecondaryContainer />
       </>}
 
     </div>

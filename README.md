@@ -86,4 +86,12 @@ The app is configured for Firebase Authentication and Analytics. Update `src/uti
 
 ## Deployment
 
-The repository includes Firebase configuration files, so the production build can be deployed with Firebase Hosting after installing and authenticating the Firebase CLI.
+The repository includes Firebase Hosting configuration, so the production build can be deployed after installing and authenticating the Firebase CLI.
+
+Before deploying:
+
+- Add `REACT_APP_TMDB_TOKEN` and `REACT_APP_GEMINI_KEY` to the hosting provider's environment variables.
+- Add the deployed domain to Firebase Authentication's authorized domains.
+- Keep real `.env` files private. Use `.env.example` as the template.
+
+Important: Create React App bundles `REACT_APP_*` values into the browser JavaScript. For a public production app, move TMDB and Gemini calls behind a backend or serverless function before using unrestricted keys.

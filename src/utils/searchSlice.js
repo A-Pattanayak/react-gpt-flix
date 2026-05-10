@@ -6,6 +6,7 @@ const searchSlice = createSlice({
     searchstatus: false,
     movieNames:null,
     geminiList:null,
+    isSearchLoading: false,
   },
   reducers: {
     toggleSearch: (state,action) => {
@@ -15,8 +16,12 @@ const searchSlice = createSlice({
       const {movieNames,geminiList}=action.payload;
       state.movieNames=movieNames;
       state.geminiList=geminiList;
+      state.isSearchLoading=false;
+  },
+    setSearchLoading:(state,action)=>{
+      state.isSearchLoading=action.payload;
   }
 }});
 export default searchSlice.reducer;
-export const {toggleSearch, addMovieNames} = searchSlice.actions;
+export const {toggleSearch, addMovieNames, setSearchLoading} = searchSlice.actions;
 
