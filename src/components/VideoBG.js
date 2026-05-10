@@ -5,6 +5,11 @@ const VideoBG = ({movieId}) => {
   const trailerVideo=useSelector((store)=>store.movie?.trailerVideos?.[movieId]);
  
   useTrailer(movieId);
+
+  if (!trailerVideo?.key) {
+    return <div className="absolute inset-0 -z-10 bg-black"></div>
+  }
+
   return (  
     <div className="absolute inset-0 -z-10 overflow-hidden">
       <iframe
