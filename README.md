@@ -1,22 +1,28 @@
-# React GPT Flix
+# Gemflix
 
-A Netflix-inspired movie browsing app built with React, Firebase Authentication, Redux Toolkit, Tailwind CSS, TMDB, and Gemini-powered movie recommendations.
+Gemflix is a Netflix-inspired movie discovery app powered by React, TMDB, Firebase Authentication, Redux Toolkit, Tailwind CSS, and Gemini recommendations.
 
-## Features
+## Live Demo
 
-- Email/password signup and sign in with Firebase Authentication
-- Auth-aware routing between login and browse pages
-- Netflix-style browse page with hero trailer playback
-- Movie rows for now playing, popular, top rated, and upcoming titles
-- TMDB-backed movie search results
-- Gemini-powered recommendations from a natural-language prompt
-- Multilingual search UI labels for English and Hindi
-- Redux Toolkit state management for user, movie, search, and app config data
-- Responsive Tailwind CSS styling
+[gem-flix-vert.vercel.app](https://gem-flix-vert.vercel.app)
+
+## What I Built
+
+- Firebase email/password authentication with sign up, sign in, sign out, and protected routing
+- Browse page with a Netflix-style hero section, trailer background, and movie title overlay
+- TMDB-powered movie rows for now playing, popular, top rated, and upcoming movies
+- Reusable movie cards, movie lists, shimmer loading UI, header, footer, and layout components
+- Gemini-powered movie recommendation search from natural-language prompts
+- TMDB search integration to display recommended movie results
+- Multi-language search labels for English and Hindi
+- Centralized app state using Redux Toolkit slices for user, movies, search, and config data
+- Custom hooks for fetching movie categories and trailers
+- Responsive UI with Tailwind CSS
+- Production deployment setup for Vercel, with Firebase Hosting config also included
 
 ## Tech Stack
 
-- React and Create React App
+- React with functional components and hooks
 - React Router
 - Redux Toolkit and React Redux
 - Tailwind CSS
@@ -24,26 +30,29 @@ A Netflix-inspired movie browsing app built with React, Firebase Authentication,
 - TMDB API
 - Google Gemini API
 - YouTube iframe trailers
+- Vercel deployment
+
+## Project Structure
+
+```text
+src/
+  components/   UI components, pages, shimmer states, and layout pieces
+  hooks/        Custom TMDB data-fetching hooks
+  utils/        Firebase, Redux store/slices, constants, validation, and API helpers
+```
 
 ## Getting Started
 
-Install dependencies:
-
 ```bash
 npm install
+npm start
 ```
 
-Create a `.env` file in the project root and add your API keys:
+Create a `.env` file in the project root:
 
 ```bash
 REACT_APP_TMDB_TOKEN=your_tmdb_v4_access_token
 REACT_APP_GEMINI_KEY=your_gemini_api_key
-```
-
-Start the development server:
-
-```bash
-npm start
 ```
 
 Build for production:
@@ -52,46 +61,8 @@ Build for production:
 npm run build
 ```
 
-Run tests:
+## Notes
 
-```bash
-npm test
-```
+Add your deployed domain to Firebase Authentication's authorized domains before using the production app. Keep real API keys out of Git and use `.env.example` as the template.
 
-If PowerShell blocks `npm`, run the same commands with `npm.cmd`, for example:
-
-```bash
-npm.cmd run build
-```
-
-## Project Structure
-
-```text
-src/
-  components/   React UI components and pages
-  hooks/        TMDB data-fetching hooks
-  utils/        Firebase, Redux slices, constants, API helpers, and validation
-```
-
-## Firebase
-
-The app is configured for Firebase Authentication and Analytics. Update `src/utils/Firebase.js` if you want to connect it to a different Firebase project.
-
-## Available Scripts
-
-- `npm start` starts the local development server.
-- `npm run build` creates a production build in `build/`.
-- `npm test` runs the test watcher.
-- `npm run eject` ejects Create React App configuration.
-
-## Deployment
-
-The repository includes Firebase Hosting configuration, so the production build can be deployed after installing and authenticating the Firebase CLI.
-
-Before deploying:
-
-- Add `REACT_APP_TMDB_TOKEN` and `REACT_APP_GEMINI_KEY` to the hosting provider's environment variables.
-- Add the deployed domain to Firebase Authentication's authorized domains.
-- Keep real `.env` files private. Use `.env.example` as the template.
-
-Important: Create React App bundles `REACT_APP_*` values into the browser JavaScript. For a public production app, move TMDB and Gemini calls behind a backend or serverless function before using unrestricted keys.
+Create React App exposes `REACT_APP_*` values in the browser bundle, so production apps should eventually move unrestricted API calls behind a backend or serverless function.
