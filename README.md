@@ -1,54 +1,59 @@
 # Gemflix
 
-Gemflix is a Netflix-inspired movie discovery app powered by React, TMDB, Firebase Authentication, Redux Toolkit, Tailwind CSS, and Gemini recommendations.
+Netflix-inspired movie discovery with Gemini-powered recommendations.
 
-## Live Demo
+Gemflix combines Firebase auth, TMDB movie data, trailer previews, multilingual search labels, and AI recommendations into a responsive React experience.
 
-[gem-flix-vert.vercel.app](https://gem-flix-vert.vercel.app)
+[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-gem--flix--vert.vercel.app-E50914?style=for-the-badge&logo=vercel&logoColor=white)](https://gem-flix-vert.vercel.app)
 
-## What I Built
-
-- Firebase email/password authentication with sign up, sign in, sign out, and protected routing
-- Browse page with a Netflix-style hero section, trailer background, and movie title overlay
-- TMDB-powered movie rows for now playing, popular, top rated, and upcoming movies
-- Reusable movie cards, movie lists, shimmer loading UI, header, footer, and layout components
-- Gemini-powered movie recommendation search from natural-language prompts
-- TMDB search integration to display recommended movie results
-- Multi-language search labels for English and Hindi
-- Centralized app state using Redux Toolkit slices for user, movies, search, and config data
-- Custom hooks for fetching movie categories and trailers
-- Responsive UI with Tailwind CSS
-- Production deployment setup for Vercel, with Firebase Hosting config also included
+---
 
 ## Tech Stack
 
-- React with functional components and hooks
-- React Router
-- Redux Toolkit and React Redux
-- Tailwind CSS
-- Firebase Authentication and Analytics
-- TMDB API
-- Google Gemini API
-- YouTube iframe trailers
-- Vercel deployment
+![React](https://img.shields.io/badge/Frontend-React-61DAFB?style=for-the-badge&logo=react&logoColor=111111)
+![Redux](https://img.shields.io/badge/State-Redux_Toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Styling-Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Firebase](https://img.shields.io/badge/Auth-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=111111)
+![Gemini](https://img.shields.io/badge/AI-Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
+![TMDB](https://img.shields.io/badge/API-TMDB-01B4E4?style=for-the-badge&logo=themoviedatabase&logoColor=white)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-## Project Structure
+---
+
+## Features
+
+- Firebase sign up, sign in, sign out, and protected routing
+- Netflix-style browse page with hero trailer playback
+- TMDB movie rows for now playing, popular, top rated, and upcoming titles
+- Gemini-powered movie recommendations from natural-language prompts
+- TMDB search results for AI-suggested movies
+- Multilingual search labels for English and Hindi
+- Redux Toolkit slices for user, movie, search, and config state
+- Custom hooks for movie categories and trailer fetching
+- Reusable components with shimmer loading states
+- Responsive Tailwind CSS UI
+
+---
+
+## Architecture
 
 ```text
 src/
-  components/   UI components, pages, shimmer states, and layout pieces
-  hooks/        Custom TMDB data-fetching hooks
-  utils/        Firebase, Redux store/slices, constants, validation, and API helpers
+  components/   UI components, pages, layout, cards, and shimmer states
+  hooks/        Custom hooks for TMDB data and trailers
+  utils/        Firebase, Redux store/slices, constants, validation, APIs
 ```
 
-## Getting Started
+---
+
+## Run Locally
 
 ```bash
 npm install
 npm start
 ```
 
-Create a `.env` file in the project root:
+Create a `.env` file:
 
 ```bash
 REACT_APP_TMDB_TOKEN=your_tmdb_v4_access_token
@@ -61,8 +66,8 @@ Build for production:
 npm run build
 ```
 
-## Notes
+---
 
-Add your deployed domain to Firebase Authentication's authorized domains before using the production app. Keep real API keys out of Git and use `.env.example` as the template.
+## Deployment Notes
 
-Create React App exposes `REACT_APP_*` values in the browser bundle, so production apps should eventually move unrestricted API calls behind a backend or serverless function.
+Add your deployed domain to Firebase Authentication's authorized domains and keep real API keys out of Git. Since Create React App exposes `REACT_APP_*` values in the browser bundle, unrestricted production API calls should eventually move behind a backend or serverless function.
