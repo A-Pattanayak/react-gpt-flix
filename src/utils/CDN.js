@@ -10,6 +10,7 @@ export const apiOptions = {
   }
 }
 export const posterCDN= "https://image.tmdb.org/t/p/w342";
+export const backdropCDN= "https://image.tmdb.org/t/p/original";
 
 export const bg_img="https://assets.nflxext.com/ffe/siteui/vlv3/5bd3572a-0d1b-4228-aaa7-5b2dc45952b2/web/IN-en-20260413-TRIFECTA-perspective_4100808f-7dc6-4c78-8677-18db2989f7bc_large.jpg";
 
