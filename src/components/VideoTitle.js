@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VideoTitle = ({title, overview, trailerKey}) => {
+const VideoTitle = ({title, overview, trailerKey, onMoreInfo}) => {
   const handlePlayTrailer = () => {
     if (!trailerKey) return;
     window.open(`https://www.youtube.com/watch?v=${trailerKey}`, "_blank", "noopener,noreferrer");
@@ -35,7 +35,11 @@ const VideoTitle = ({title, overview, trailerKey}) => {
             >
               Play
             </button>
-            <button className='rounded-md bg-gray-700/80 px-6 py-2 font-semibold text-white transition hover:bg-gray-600/80'>
+            <button
+              type='button'
+              onClick={onMoreInfo}
+              className='rounded-md bg-gray-700/80 px-6 py-2 font-semibold text-white transition hover:bg-gray-600/80'
+            >
               More Info
             </button>
           </div>
