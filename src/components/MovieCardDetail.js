@@ -49,7 +49,7 @@ const MovieCardDetail = ({ movie, onClose }) => {
         <div className='flex flex-col gap-5 p-4 md:flex-row md:p-5'>
           {movie.poster_path && (
             <img
-              className='w-full rounded-md md:w-56'
+              className='mx-auto w-36 rounded-md sm:w-44 md:mx-0 md:w-56'
               src={posterCDN + movie.poster_path}
               alt={title}
             />
