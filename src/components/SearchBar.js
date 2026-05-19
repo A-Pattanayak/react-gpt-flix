@@ -34,11 +34,14 @@ const SearchBar=()=>{
       
     
       const gptMoviesString = result.response.text();
+      const exactMovieQuery = searchText.current.value.trim();
       const gptMoviesArray = gptMoviesString.split(",").map((movie)=>movie.trim());
 
-      const promiseArray= gptMoviesArray.map((movie)=> fetchGeminiMovies(movie));
+      const movieQueries = [exactMovieQuery, ...gptMoviesArray].filter(Boolean);
+      const movieNames = [exactMovieQuery ? `Search results for "${exactMovieQuery}"` : null, ...gptMoviesArray].filter(Boolean);
+      const promiseArray= movieQueries.map((movie)=> fetchGeminiMovies(movie));
       const geminiMovies= await Promise.all(promiseArray);
-      dispatch(addMovieNames({movieNames:gptMoviesArray,geminiList:geminiMovies}));
+      dispatch(addMovieNames({movieNames,geminiList:geminiMovies}));
 
 
     } catch (error) {
