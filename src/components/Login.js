@@ -16,11 +16,14 @@ import {bg_img} from '../utils/CDN';
 
 const Login = (props) => {
   const dispatch = useDispatch();
+  const TEST_USER_EMAIL = 'user@gmail.com';
+  const TEST_USER_PASSWORD = '1234User';
   
 
   const [isSignIn, setIsSignIn] = useState(true);
   const [errmsg, seterrmsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('Signing you in...');
 
   const toggleSignup = () => {
     setIsSignIn((currentState) => !currentState);
@@ -42,6 +45,7 @@ const Login = (props) => {
     }
     seterrmsg(null);
     setIsLoading(true);
+    setLoadingMessage(isSignIn ? 'Signing you in...' : 'Creating your account...');
     if(!isSignIn){
          createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
          .then((userCredential) => {
@@ -85,11 +89,28 @@ const Login = (props) => {
     }
   };
 
+  const loginWithTestUser = () => {
+    seterrmsg(null);
+    setIsLoading(true);
+    setLoadingMessage('Signing in test user...');
+
+    signInWithEmailAndPassword(auth, TEST_USER_EMAIL, TEST_USER_PASSWORD)
+      .then(() => {
+        seterrmsg('Signed in as test user!');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        seterrmsg(errorCode+"-"+errorMessage);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
   return (
     <div className="relative min-h-screen w-full">
       <Header />  
       {isLoading && (
-        <LoginShimmerUI message={isSignIn ? 'Signing you in...' : 'Creating your account...'} />
+        <LoginShimmerUI message={loadingMessage} />
       )}
       <img
         src={bg_img}
@@ -129,11 +150,21 @@ const Login = (props) => {
           />
         <p className="text-red-500 my-1">{errmsg}</p>
           <button
-            type="submit" onClick={Validator}
-            className="w-full rounded-md bg-red-600 p-3 my-2 font-bold text-white"
+            type="submit" onClick={Validator} disabled={isLoading}
+            className="w-full rounded-md bg-red-600 p-3 my-2 font-bold text-white disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSignIn ? 'Sign In' : 'Sign Up'}
           </button>
+          {isSignIn && (
+            <button
+              type="button"
+              onClick={loginWithTestUser}
+              disabled={isLoading}
+              className="w-full rounded-md border border-red-500/70 bg-gray-800 p-3 my-2 font-bold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              Test User Login
+            </button>
+          )}
           <p className="mt-4 cursor-pointer block from-neutral-800" onClick={toggleSignup}>
         {isSignIn ? 'New here? Sign Up Now' : 'Already have an account? Sign In'}
         </p>
